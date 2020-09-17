@@ -1,0 +1,460 @@
+/*--------------------------------- Início do menu superior -----------------------------*/
+/* Add a black background color to the top navigation */
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: #ffffff;
+  overflow: hidden;
+  width: 100%;
+  height: 50px;
+  box-shadow: 2px 2px 5px rgba(50, 50, 50, 0.30);
+  position: fixed;
+  z-index:1;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: right;
+  color:#040B15;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav img#home {
+  float: left;
+  width: 140px;
+  margin: 6px 20px
+}
+
+.topnav a#logout {
+  color: #FF0000;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  color :#EF6C00;
+}
+
+/* ---------------------------------- Fim do menu superior ------------------------------*/
+
+
+/*----------------------------------- Início do menu lateral ----------------------------*/
+* {
+  box-sizing: border-box;}
+
+body {font-family: "Roboto", sans-serif;}
+
+/* Style the tab */
+.tab {
+  float: left;
+  top: 50px;
+  border: 0px;
+  background-color: #001938;
+  width: 200px;
+  height: 920px;
+  position: fixed;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  display: block;
+  background-color: inherit;
+  color: #ffffff;
+  padding: 16px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 17px;
+  
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color:#002E6E;
+}
+
+/* Create an active/current "tab button" class */
+.tab button.active {
+  background-color: #EF6C00;
+  color: #ffffff;
+}
+
+/* Style the tab content */
+.tabcontent {
+  float: left;
+  width: 87%;
+  height: 100%;
+  margin-top: 50px;
+  margin-left: 200px;
+}
+/*------------------------------------ Fim do menu lateral -------------------------------*/
+
+/*------------------------------------ Início do Content Area -------------------------------*/
+
+/* Style the datatab */
+.datatab {
+  overflow: hidden;
+  background-color:#ffffff;
+  padding-bottom: 8px;
+}
+
+/* Style the buttons inside the datatab */
+.datatab button {
+  background-color: #ffffff;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+/* Change background color of buttons on hover */
+.datatab button:hover {
+  background-color: #ddd;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(50, 50, 50, 0.30);
+}
+
+/* Create an active/current datatablink class */
+.datatab button.active {
+  background-color:  #ddd;
+  color:#040B15;
+  box-shadow: 2px 2px 5px rgba(50, 50, 50, 0.30);
+}
+
+/* Style the datatab content */
+.datatabcontent {
+  display: none;
+  padding: 6px 12px;
+  border-top: none;
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+}
+
+.material-icons{
+vertical-align: middle;
+}
+
+.material-icons#table{
+  vertical-align: middle;
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+  }
+
+.form-group#cpf {
+  width: 50%;
+  float: left;
+  margin-left: 8px;
+}
+.form-group#telefone {
+  width: 43%;
+  float: left;
+  margin-left: 20px;
+}
+.form-group#nome {
+  width: 97%;
+  float: left;
+  margin-left: 8px;
+}
+
+.form-group#rg {
+  width: 10%;
+  float: left;
+  margin-top: 19px;
+}
+
+.form-group#dataRg {
+  width: 15%;
+  float: left;
+  margin-left: 16px;
+  margin-top: 10px;
+}
+
+.form-group#orgaoRg {
+  width: 30%;
+  float: left;
+  margin-top: 19px;
+  margin-left: 16px;
+}
+
+.form-group#estadoRg {
+  width: 18%;
+  float: left;
+  margin-left: 16px;
+  margin-top: 11px;
+}
+
+.form-group#dataNascimento {
+  width: 15%;
+  float: left;
+  margin-left: 16px;
+  margin-top: 10px;
+}
+
+.form-group#mae {
+  width: 20%;
+  float: left;
+  margin-top: 9px;
+}
+
+.form-group#estadoCivil {
+  width: 15%;
+  float: left;
+  margin-left: 16px;
+}
+
+.form-group#profissao {
+  width: 20%;
+  float: left;
+  margin-left: 16px;
+  margin-top: 9px;
+}
+
+.form-group#email {
+  width: 20%;
+  float: left;
+  margin-left: 16px;
+  margin-top: 9px;
+}
+
+.form-group#cep {
+  width: 20%;
+  float: left;
+}
+
+.form-group#logradouro {
+  width: 20%;
+  float: left;
+  margin-left: 16px;
+}
+
+.form-group#logradouroNumero {
+  width: 10%;
+  float: left;
+  margin-left: 16px;
+}
+
+.form-group#complemento {
+  width: 20%;
+  float: left;
+  margin-left: 16px;
+}
+
+.form-group#bairro {
+  width: 20%;
+  float: left;
+  margin-left: 16px;
+}
+
+.form-group#cidade {
+  width: 20%;
+  float: left;
+  margin-top: 8px;
+}
+
+.form-group#estado {
+  width: 20%;
+  float: left;
+  margin-left: 16px;
+}
+
+.form-group#banco {
+  width: 20%;
+  float: left;
+  padding-top: 20px;
+}
+
+.form-group#agencia {
+  width: 20%;
+  float: left;
+  margin-left: 16px;
+  margin-top: 8px;
+}
+
+.form-group#contacorrente {
+  width: 20%;
+  float: left;
+  margin-left: 16px;
+  margin-top: 8px;
+}
+
+.form-group#orgaoconvenio {
+  width: 30%;
+  float: left;
+  margin-left: 16px;
+}
+
+.form-group#tipovenda {
+  width: 20%;
+  float: left;
+}
+
+.form-group#parcelas {
+  width: 20%;
+  float: left;
+}
+
+.form-group#valorparcela {
+  width: 20%;
+  float: left;
+  margin-left: 16px;
+}
+
+.form-group#valorliberado {
+  width: 20%;
+  float: left;
+  margin-left: 16px;
+}
+
+.collapsibleButtons{
+  float: right; 
+  margin-top: 25px;
+}
+
+#btnOK{  
+  color: #fff;
+  background-color: #4caf50;
+}
+
+#btnOK:hover{  
+  color: #fff;
+  background-color: #529b54;;
+}
+
+/*------------------------------------ Fim do Content Area -------------------------------*/
+
+
+/*------------------------------------ Início dos cards -------------------------------*/
+
+.container1{
+  height: 100%;
+  width: 100%;
+  background-color: #ffffff;
+  padding: 24px 24px 24px 24px;
+}
+
+.container2{
+  height: 100%;
+  width: 100%;
+  background-color:#040B15;
+  padding: 24px 24px 24px 24px;
+}
+
+.cardTitle{
+  color: #040B15;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  word-break: break-all;
+  margin-top: 16px;
+  margin-bottom: 26px;
+}
+
+
+.initialCard{
+  height: 200px;
+  background-color: #ffffff;
+  padding: 2px 2px 2px 2px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(50, 50, 50, 0.30);
+  float: left;
+}
+
+.historyCard{
+  height: 200px;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(50, 50, 50, 0.30);
+  float: left;
+}
+.callCard{
+  float: right;
+  background-color: #ddd;
+  border-radius: 4px;
+  border: 1px;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 100px;
+  line-height: 100px;
+}
+
+p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  margin-top: 200px;
+  margin-bottom: 8px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/*------------------------------------ Fim dos cards -------------------------------*/
+
+/*------------------------------- Início do Collapsed Panel -------------------------------*/
+.collapsible {
+  background-color: #ffffff;
+  color: #040B15;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  min-width: 100%;
+  text-align: left;
+  margin-top: 16px;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(50, 50, 50, 0.30);
+  padding-left: 24px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-right: 16px;
+}
+
+.form-group .form-control:focus { 
+  background-image: linear-gradient(0deg,#EF6C00 2px,rgba(0,150,136,0) 0),linear-gradient(0deg,rgba(0,0,0,.26) 1px,transparent 0);
+  color: #EF6C00;
+}
+
+.bmd-form-group [class^=bmd-label].bmd-label-floating { 
+  color: #333333;
+}
+
+/* .bmd-form-group .bmd-label-static, .bmd-form-group.is-filled .bmd-label-floating, .bmd-form-group .is-filled .bmd-label-floating, .bmd-form-group.is-focused .bmd-label-floating, .bmd-form-group .is-focused .bmd-label-floating{ 
+  color: #EF6C00;
+} */
+
+.active, .collapsible:hover {
+  background-color:#f2f2f2;
+  color: #040B15;
+}
+
+.collapsible:after {
+  content: url(assets/DownIcon.svg);
+  float: right;
+}
+
+.collapsible.active:after {
+  content: url(assets/UpIcon.svg);;
+}
+
+.content {
+  padding: 0px 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #ffffff;
+  box-shadow: 2px 2px 5px rgba(50, 50, 50, 0.30);
+  
+}
+
+/*------------------------------- Fim do Collapsed Panel -------------------------------*/
+

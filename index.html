@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Cadastro de Vendas - Empresta</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+  <link rel="stylesheet"
+    href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
+    integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body onload="showLigar()">
+  <nav>
+    <div class="topnav">
+      <div>
+        <img src="assets/logo.svg" href="#home" id="home">
+      </div>
+      <div>
+        <a href="#logout" id="logout">Sair</a>
+        <a href="#config">Configurações</a>
+        <a href="#manual">Manuais de atendimento</a>
+        <a href="#schedule">Agenda</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'Vendas')" id="defaultOpen">Vendas</button>
+    <button class="tablinks" onclick="openCity(event, 'Chamados')">Chamados</button>
+    <button class="tablinks" onclick="openCity(event, 'Acessos')">Acessos</button>
+  </div>
+  <div id="Vendas" class="tabcontent">
+
+    <div class="container1">
+      <h2>Nova venda</h2>
+      <div class="row">
+        <!-------------------------------- ITENS DO FORMULÁRIO -------------------------------------->
+        <!--- INÍCIO DOS DADOS INICIAIS ---->
+        <div class="col">
+          <div>
+            <label class="cardTitle">Dados para chamada</label><br>
+            <div class="initialCard" id="initialCard">
+              <!---Início do campo de formulário ---->
+              <form>
+                <div class="form-group" id="cpf">
+                  <label for="cpf" class="bmd-label-floating">CPF</label>
+                  <input type="text" class="form-control" id="cpf">
+                  <span class="bmd-help">Não utilize pontos ou hífen.
+                </div>
+                <div class="form-group" id="telefone">
+                  <label for="telefone" class="bmd-label-floating">Número</label>
+                  <input type="text" class="form-control" id="telefone">
+                  <span class="bmd-help">Não se esqueça de informar o DDD.</span>
+                </div>
+                <div class="form-group" id="nome">
+                  <label for="nome" class="bmd-label-floating">Nome</label>
+                  <input type="text" class="form-control" id="nome">
+              </form>
+              <!---Fim do campo de formulário ---->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="callCard">
+          <p id="chronometer"></p>
+        </div>
+        <button type="button" class="btn btn-raised btn-lg btn-success" id="ligar"
+          style="height: 28%; width: 100%; margin-bottom: 10px" onclick="showDesligar();iniciaTimer()">Ligar <i
+            class="material-icons" style="margin-left: 8px;">call</i></button>
+        <button type="button" class="btn btn-raised btn-lg btn-success" id="desligar"
+          style="height: 28%; width: 100%; background-color: #FF0000; margin-bottom: 10px" onclick="showLigar()"
+          data-toggle="modal" data-target="#exampleModal">Desligar<i class="material-icons"
+            style="margin-left: 8px;">call</i></button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Deseja desconectar a ligação?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h6>Por favor, informe o motivo.</h6>
+                <div class="form-group" id="motivo">
+                  <label for="motivo" class="bmd-label-floating">Motivo</label>
+                  <select class="form-control" id="motivoSelect">
+                    <option>Não atende</option>
+                    <option>Ocupado</option>
+                    <option>Cliente não estava</option>
+                    <option>Desistência/Cancelamento da venda</option>
+                    <option>Outro</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleTextarea" class="bmd-label-floating">Observações</label>
+                  <textarea class="form-control" id="exampleTextarea" rows="2"></textarea>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" style="color:#4caf50"
+                  onClick="window.location.reload()">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-raised btn-lg btn-success"
+          style="height: 28%; width: 100%; background-color: #EF6C00;" id="reagendar" data-toggle="modal"
+          data-target="#exampleModalReagendar">Reagendar<i class="material-icons"
+            style="margin-left: 8px;">schedule</i></button>
+        <div class="modal fade" id="exampleModalReagendar" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Deseja reagendar a ligação?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h6>Por favor, selecione uma nova data e horário. Também informe o motivo.</h6>
+                <div>
+                  <div class="form-group" id="reagendamento" style="width: 180px;">
+                    <label for="reagendamento" class="label"
+                      style="float: bottom; padding-bottom: 10px; color: #333333; font-size: 12px">Data de
+                      nascimento</label>
+                    <input type="date" class="form-control" style="height: 30px; margin-top: 12px;">
+                  </div>
+                  <div class="form-group" id="hora" style="width: 130px;">
+                    <label for="hora" class="bmd-label-floating">Hora</label>
+                    <input type="text" class="form-control" style="height: 30px; margin-top: 12px;">
+                  </div>
+                </div>
+                <div class="form-group" id="motivo">
+                  <label for="motivo" class="bmd-label-floating">Motivo</label>
+                  <select class="form-control" id="motivoSelect">
+                    <option>Não atende</option>
+                    <option>Ocupado</option>
+                    <option>Cliente não estava</option>
+                    <option>Desistência/Cancelamento da venda</option>
+                    <option>Pedido do cliente</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleTextarea" class="bmd-label-floating">Observações</label>
+                  <textarea class="form-control" id="exampleTextarea" rows="2"></textarea>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" style="color:#4caf50"
+                  onClick="window.location.reload()">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--- FIM DOS DADOS INICIAIS ---->
+      <div class="col">
+
+        <div class="datatab">
+          <button class="datatablinks" onclick="openData(event, 'London')" id="datadefaultOpen">Contatos
+            anteriores</button>
+          <button class="datatablinks" onclick="openData(event, 'Paris')">Vendas e negociações</button>
+        </div>
+        <div class="historyCard" id="historyCard">
+          <div id="London" class="datatabcontent">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">Nº</th>
+                  <th scope="col">Data</th>
+                  <th scope="col">Horário</th>
+                  <th scope="col">Resultado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>07/09/2020</td>
+                  <td>09:36</td>
+                  <td>Reagendado</td>
+                  <td>
+                    <button class="btn bmd-btn-icon dropdown-toggle" type="button" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      <i class="material-icons" id="table">more_vert</i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="ex2">
+                      <a class="dropdown-item" href="#">Detalhes</a>
+                      <a class="dropdown-item" href="#">Ver agendamento</a>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>01/09/2020</td>
+                  <td>16:47</td>
+                  <td>Reagendado</td>
+                  <td>
+                    <button class="btn bmd-btn-icon dropdown-toggle" type="button" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      <i class="material-icons" id="table">more_vert</i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="ex2">
+                      <a class="dropdown-item" href="#">Detalhes</a>
+                      <a class="dropdown-item" href="#">Ver agendamento</a>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>29/08/2020</td>
+                  <td>11:12</td>
+                  <td>Ausente</td>
+                  <td>
+                    <button type="button" class="btn bmd-btn-icon">
+                      <i class="material-icons">more_vert</i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">4</th>
+                  <td>27/08/2020</td>
+                  <td>16:24</td>
+                  <td>Sem retorno</td>
+                  <td>
+                    <button class="btn bmd-btn-icon dropdown-toggle" type="button" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      <i class="material-icons" id="table">more_vert</i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="ex2">
+                      <a class="dropdown-item" href="#">Detalhes</a>
+                      <a class="dropdown-item" href="#">Ver agendamento</a>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">5</th>
+                  <td>24/08/2020</td>
+                  <td>17:15</td>
+                  <td>Ocupado</td>
+                  <td>
+                    <button class="btn bmd-btn-icon dropdown-toggle" type="button" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      <i class="material-icons" id="table">more_vert</i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="ex2">
+                      <a class="dropdown-item" href="#">Detalhes</a>
+                      <a class="dropdown-item" href="#">Ver agendamento</a>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="Paris" class="datatabcontent">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">Nº</th>
+                  <th scope="col">Data</th>
+                  <th scope="col">Valor</th>
+                  <th scope="col">Parcelas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>16/06/2020</td>
+                  <td>R$1.500,00</td>
+                  <td>6</td>
+                  <td>
+                    <button class="btn bmd-btn-icon dropdown-toggle" type="button" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      <i class="material-icons" id="table">more_vert</i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="ex2">
+                      <a class="dropdown-item" href="#">Detalhes</a>
+                      <a class="dropdown-item" href="#">Ver agendamento</a>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>26/04/2020</td>
+                  <td>R$3.000,00</td>
+                  <td>8</td>
+                  <td>
+                    <button class="btn bmd-btn-icon dropdown-toggle" type="button" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      <i class="material-icons" id="table">more_vert</i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="ex2">
+                      <a class="dropdown-item" href="#">Detalhes</a>
+                      <a class="dropdown-item" href="#">Ver agendamento</a>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>19/02/2020</td>
+                  <td>R$7.500,00</td>
+                  <td>12</td>
+                  <td>
+                    <button type="button" class="btn bmd-btn-icon">
+                      <i class="material-icons">more_vert</i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--- INÍCIO DOS DADOS PESSOAIS ---->
+    <button class="collapsible">Dados pessoais</button>
+    <div class="content">
+      <!---Início do campo de formulário ---->
+      <form>
+        <div style="display: inline-block; width: 100%;">
+          <div class="form-group" id="rg">
+            <label for="rg" class="bmd-label-floating">RG</label>
+            <input type="text" class="form-control">
+            <span class="bmd-help">Não utilize pontos ou hífen.</span>
+          </div>
+          <div class="form-group" id="dataRg">
+            <label for="dataRg" class="label"
+              style="float: bottom; padding-bottom: 10px; color: #333333; font-size: 12px">Data de emissão do RG</label>
+            <input type="date" class="form-control" style="height: 30px; margin-top: 12px;">
+          </div>
+          <div class="form-group" id="orgaoRg">
+            <label for="orgaoRg" class="bmd-label-floating">Órgão de emissão do RG</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="form-group" id="estadoRg">
+            <label for="estadoRg" class="bmd-label-floating">Estado de emissão</label>
+            <select class="form-control" id="estadoRg">
+              <option>Acre</option>
+              <option>Alagoas</option>
+              <option>Amapá</option>
+              <option>Amazonas</option>
+              <option>Bahia</option>
+              <option>Ceará</option>
+              <option>Distrito Federal</option>
+              <option>Espírito Santo</option>
+              <option>Goiás</option>
+              <option>Maranhão</option>
+              <option>Mato Grosso</option>
+              <option>Mato Grosso do Sul</option>
+              <option>Minas Gerais</option>
+              <option>Pará</option>
+              <option>Paraíba</option>
+              <option>Paraná</option>
+              <option>Pernambuco</option>
+              <option>Piauí</option>
+              <option>Rio de Janeiro</option>
+              <option>Rio Grande do Norte</option>
+              <option>Rio Grande do Sul</option>
+              <option>Rondônia</option>
+              <option>Roraima</option>
+              <option>Santa Catarina</option>
+              <option>São Paulo</option>
+              <option>Sergipe</option>
+              <option>Tocantins</option>
+            </select>
+          </div>
+          <div class="form-group" id="dataNascimento">
+            <label for="dataNascimento" class="label"
+              style="float: bottom; padding-bottom: 10px; color: #333333; font-size: 12px">Data de nascimento</label>
+            <input type="date" class="form-control" style="height: 30px; margin-top: 12px;">
+          </div>
+        </div>
+        <div class="form-group" id="mae">
+          <label for="mae" class="bmd-label-floating">Nome da mãe</label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="form-group" id="estadoCivil">
+          <label for="estadoCivil" class="bmd-label-floating">Estado Civil</label>
+          <select class="form-control" id="estadoCivilSelect">
+            <option>Solteiro(a)</option>
+            <option>Casado(a)</option>
+            <option>Em União Estável</option>
+            <option>Divorciado(a)</option>
+            <option>Viúvo(a)</option>
+          </select>
+        </div>
+        <div class="form-group" id="profissao">
+          <label for="profissao" class="bmd-label-floating">Profissão</label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="form-group" id="email">
+          <label for="email" class="bmd-label-floating">E-mail</label>
+          <input type="email" class="form-control">
+        </div>
+        <div class="collapsibleButtons">
+          <button class="btn btn-default">Limpar campos</button>
+          <button type="submit" class="btn btn-danger btn-raised" id="btnOK">OK</button>
+        </div>
+      </form>
+      <!---Fim do campo de formulário ---->
+    </div>
+    <!--- FIM DOS DADOS PESSOAIS ---->
+    <!--- INÍCIO DO PRODUTO ---->
+    <button class="collapsible">Produto</button>
+    <div class="content">
+      <!---Início do campo de formulário ---->
+      <form>
+        <div style="display: inline-block; width: 100%">
+          <div class="radio" style="padding-top: 16px;">
+            <label>
+              <input type="radio" name="optionsRadios" id="emprestimo" value="emprestimo" checked>
+              Novo empréstimo
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="optionsRadios" id="refinanciamento" value="refinanciamento">
+              Novo refinanciamento
+            </label>
+          </div>
+        </div>
+        <div style="display: inline-block; width: 100%">
+          <div class="form-group" id="parcelas">
+            <label for="parcelas" class="bmd-label-floating">Número de parcelas</label>
+            <select class="form-control" id="parcelasSelect">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+              <option>13</option>
+              <option>14</option>
+              <option>15</option>
+              <option>16</option>
+              <option>17</option>
+              <option>18</option>
+              <option>19</option>
+              <option>20</option>
+              <option>21</option>
+              <option>22</option>
+              <option>23</option>
+              <option>24</option>
+            </select>
+          </div>
+          <div class="form-group" id="valorparcela">
+            <label for="parcelas" style="padding-top: 8px;" class="bmd-label-floating">Valor da parcela</label>
+            <input type="text" class="form-control" style="padding-top: 15px;">
+          </div>
+        </div>
+        <div class="form-group" id="valorliberdado">
+          <label for="valorliberado" class="label"
+            style="width: 150px; padding-bottom: 10px; color: #333333; font-size: 12px; padding-top: -20px;">Valor
+            liberado</label>
+          <input type="text" class="form-control" style="width:200px; padding-top: 10px" placeholder="R$15.000,00">
+        </div>
+        <div class="collapsibleButtons" style="padding-bottom:16px">
+          <button class="btn btn-default">Limpar campos</button>
+          <button type="submit" class="btn btn-danger btn-raised" id="btnOK">OK</button>
+        </div>
+
+      </form>
+      <!---Fim do campo de formulário ---->
+    </div>
+    <!--- FIM DO PRODUTO---->
+    <button class="collapsible">Endereço</button>
+    <div class="content">
+      <!---Início do campo de formulário ---->
+      <form>
+        <div style="display: inline-block; width: 100%">
+          <div class="form-group" id="cep">
+            <label for="cep" class="bmd-label-floating">CEP</label>
+            <input type="number" class="form-control" id="cep">
+          </div>
+          <div class="form-group" id="logradouro">
+            <label for="logradouro" class="bmd-label-floating">Logradouro</label>
+            <input type="text" class="form-control" id="logradouro">
+          </div>
+          <div class="form-group" id="logradouroNumero">
+            <label for="numero" class="bmd-label-floating">Número</label>
+            <input type="number" class="form-control" id="numero">
+          </div>
+          <div class="form-group" id="bairro">
+            <label for="bairro" class="bmd-label-floating">Bairro</label>
+            <input type="text" class="form-control" id="bairro">
+          </div>
+          <div class="form-group" id="complemento" style="width: 10%;">
+            <label for="complemento" class="bmd-label-floating">Complemento</label>
+            <input type="text" class="form-control" id="complemento">
+          </div>
+        </div>
+        <div class="form-group" id="cidade">
+          <label for="cidade" class="bmd-label-floating">Cidade</label>
+          <input type="text" class="form-control" id="cidade">
+        </div>
+        <div class="form-group" id="estado">
+          <label for="uf" class="bmd-label-floating">Estado</label>
+          <select class="form-control" id="uf">
+            <option value="AC">Acre</option>
+            <option value="AL">Alagoas</option>
+            <option value="AP">Amapá</option>
+            <option value="AM">Amazonas</option>
+            <option value="BA">Bahia</option>
+            <option value="CE">Ceará</option>
+            <option value="DF">Distrito Federal</option>
+            <option value="ES">Espírito Santo</option>
+            <option value="GO">Goiás</option>
+            <option value="MA">Maranhão</option>
+            <option value="MT">Mato Grosso</option>
+            <option value="MS">Mato Grosso do Sul</option>
+            <option value="MG">Minas Gerais</option>
+            <option value="PA">Pará</option>
+            <option value="PB">Paraíba</option>
+            <option value="PR">Paraná</option>
+            <option value="PE">Pernambuco</option>
+            <option value="PI">Piauí</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="RN">Rio Grande do Norte</option>
+            <option value="RS">Rio Grande do Sul</option>
+            <option value="RO">Rondônia</option>
+            <option value="RR">Roraima</option>
+            <option value="SC">Santa Catarina</option>
+            <option value="SP">São Paulo</option>
+            <option value="SE">Sergipe</option>
+            <option value="TO">Tocantins</option>
+          </select>
+        </div>
+        <div class="collapsibleButtons">
+          <button class="btn btn-default">Limpar campos</button>
+          <button type="submit" class="btn btn-danger btn-raised" id="btnOK">OK</button>
+        </div>
+      </form>
+      <!---Fim do campo de formulário ---->
+    </div>
+    <!--- FIM DO ENDEREÇO ---->
+    <!--- INÍCIO DOS DADOS BANCÁRIOS ---->
+    <button class="collapsible">Dados bancários</button>
+    <div class="content">
+      <!---Início do campo de formulário ---->
+      <form>
+        <div style="display: inline-block; width: 100%">
+          <div class="form-group" id="cep">
+            <label for="banco" class="bmd-label-floating">Banco</label>
+            <input type="text" class="form-control" id="banco">
+          </div>
+          <div class="form-group" id="logradouro">
+            <label for="banco" class="bmd-label-floating">Agência</label>
+            <input type="text" class="form-control" id="banco">
+          </div>
+          <div class="form-group" id="contacorrente">
+            <label for="contacorrente" class="bmd-label-floating">Conta Corrente</label>
+            <input type="text" class="form-control" id="contacorrente">
+          </div>
+          <div class="form-group" id="orgaoconvenio">
+            <label for="orgaoconvenio" class="bmd-label-floating">Convênio</label>
+            <select class="form-control" id="orgaoconvenio">
+              <option>INSS - Instituto Nacional de Seguro Social</option>
+              <option>IPSEMG - Instituto de Previdência dos Servidores do Estado de Minas Gerais</option>
+              <option>PMMG - Polícia Militar de Minas Gerais</option>
+            </select>
+          </div>
+        </div>
+        <div class="collapsibleButtons" style="padding-bottom:16px;">
+          <button class="btn btn-default">Limpar campos</button>
+          <button type="submit" class="btn btn-danger btn-raised" id="btnOK">OK</button>
+        </div>
+      </form>
+      <!---Fim do campo de formulário ---->
+    </div>
+    <!--- FIM DOS DADOS BANCÁRIOS ---->
+    <!--- INÍCIO DOS DOCUMENTOS ---->
+    <button class="collapsible">Documentos</button>
+    <div class="content">
+      <!---Início do campo de formulário ---->
+      <form>
+        <div class="form-group">
+          <label style="margin-top: 16px; margin-bottom: 16px">Fazer upload dos seguintes documentos: RG (frente e
+            verso), Contrato e confirmação dos dados bancários</label>
+          <input type="file" class="form-control-file" style="margin-bottom: 16px" id="exampleInputFile">
+          <input type="file" class="form-control-file" style="margin-bottom: 16px" id="exampleInputFile">
+          <input type="file" class="form-control-file" style="margin-bottom: 16px" id="exampleInputFile">
+          <small class="text-muted" style="margin-top: 16px">
+            Maximum File Size: 10 MB | Suported File Types: Images: .jpg, .jpeg, .gif .png, .bmp | Documents: docx,
+            .doc, .pdf | Outros: .zip</small>
+        </div>
+        <div class="collapsibleButtons" style="padding-bottom:16px;">
+          <button class="btn btn-default">Limpar campos</button>
+          <button type="submit" class="btn btn-danger btn-raised" id="btnOK">OK</button>
+        </div>
+      </form>
+      <!---Fim do campo de formulário ---->
+    </div>
+    <!--- FIM DOS DOCUMENTOS ---->
+    <!-------------------------------- ITENS DO FORMULÁRIO -------------------------------------->
+    <button type="button" class="btn btn-raised btn-lg btn-success" id="ligar"
+      style="height: 28%; width: 100%; margin-top: 16px">Concluir venda <i class="material-icons"
+        style="margin-left: 8px;">check</i></button>
+    <button type="button" class="btn btn-raised btn-lg btn-danger" id="ligar"
+      style="height: 28%; width: 100%; margin-bottom: 10px; margin-top: 8px">Cancelar venda <i class="material-icons"
+        style="margin-left: 8px;">delete</i></button>
+  </div>
+  <div id="Chamados" class="tabcontent">
+    <h2>Título da página</h2>
+    <p>Em construção.</p>
+  </div>
+  <div id="Acessos" class="tabcontent">
+    <h2>Título da página</h2>
+    <p>Em construção.</p>
+  </div>
+
+  <script>
+    function showDesligar() {
+      $('#desligar').show();
+      $('#ligar').hide();
+      $('#chronometer').show();
+    }
+    function showLigar() {
+      $('#desligar').hide();
+      $('#ligar').show();
+      $('#chronometer').hide();
+    }
+  </script>
+  <script>
+
+    function openData(evt, data) {
+      var i, datatabcontent, tablinks;
+      datatabcontent = document.getElementsByClassName("datatabcontent");
+      for (i = 0; i < datatabcontent.length; i++) {
+        datatabcontent[i].style.display = "none";
+      }
+      datatablinks = document.getElementsByClassName("datatablinks");
+      for (i = 0; i < datatablinks.length; i++) {
+        datatablinks[i].className = datatablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(data).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("datadefaultOpen").click();
+  </script>
+
+  <!--Importando Script Jquery-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript">
+    $("#cep").focusout(function () {
+      //Início do Comando AJAX
+      $.ajax({
+        //O campo URL diz o caminho de onde virá os dados
+        //É importante concatenar o valor digitado no CEP
+        url: 'https://viacep.com.br/ws/' + $(this).val() + '/json/unicode/',
+        //Aqui você deve preencher o tipo de dados que será lido,
+        //no caso, estamos lendo JSON.
+        dataType: 'json',
+        //SUCESS é referente a função que será executada caso
+        //ele consiga ler a fonte de dados com sucesso.
+        //O parâmetro dentro da função se refere ao nome da variável
+        //que você vai dar para ler esse objeto.
+        success: function (resposta) {
+          //Agora basta definir os valores que você deseja preencher
+          //automaticamente nos campos acima.
+          $("#logradouro").val(resposta.logradouro);
+          $("#complemento").val(resposta.complemento);
+          $("#bairro").val(resposta.bairro);
+          $("#cidade").val(resposta.localidade);
+          $("#uf").val(resposta.uf);
+          //Vamos incluir para que o Número seja focado automaticamente
+          //melhorando a experiência do usuário
+          $("#numero").focus();
+        }
+      });
+    });
+  </script>
+  <script src="script.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+  <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"
+    integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
+    integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9"
+    crossorigin="anonymous"></script>
+  <script>$(document).ready(function () { $('body').bootstrapMaterialDesign(); });</script>
+
+  <script>
+    function iniciaTimer() {
+      document.getElementById("chronometer").innerHTML = "";
+      // Set the date we're counting down to
+      var now1 = new Date().getTime();
+      // Update the count down every 1 second
+      var x = setInterval(function () {
+        // Get today's date and time
+        var now = new Date().getTime();
+        // Find the distance between now and the count down date
+        var distance = now - now1;
+        // Time calculations for days, hours, minutes and seconds
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        // Output the result in an element with id="demo"
+        document.getElementById("chronometer").innerHTML = hours + "h "
+          + minutes + "m " + seconds + "s ";
+        // If the count down is over, write some text 
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById("chronometer").innerHTML = "EXPIRED";
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+
+</html>
